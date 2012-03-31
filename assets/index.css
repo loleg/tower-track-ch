@@ -1,0 +1,37 @@
+#map {
+  position:absolute;
+  top:0px; left:0px;
+}
+
+#github {
+  right: -65px;
+  height: 30px;
+  top: 40px;
+  position: absolute;
+  text-decoration: none;
+  width: 250px;
+	-webkit-transform: rotate(45deg); 
+	-moz-transform: rotate(45deg);	
+}
+#github span {
+    background: red;
+    color: white;
+    font-size: 14px;
+    left: 0;
+    padding: 5px 0;
+    position: absolute;
+    text-align: center;
+    width: 250px;
+}
+#github span:last-child {
+      /* this is the backside */
+      background: orange;
+      opacity: 0;
+    }
+#github:hover span:first-child {
+      opacity: 0;
+    }
+#github:hover span:last-child {
+      opacity: 1;
+    }
+

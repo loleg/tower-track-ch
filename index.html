@@ -7,27 +7,32 @@
 	<link rel="stylesheet"  href="lib/jquery.mobile-1.0.1.min.css" />
 	<script src="lib/jquery.js"></script>
 	<script src="lib/jquery.mobile-1.0.1.min.js"></script>
-	
+	<script src="assets/geo.js"></script>
+	<link rel="stylesheet"  href="assets/index.css" />
 </head> 
 <body> 
 <div data-role="page" class="type-home">
 	<div data-role="content">
-		<p id="jqm-version">1.0.1 Final Release</p>
-
 		
-		
+		<div id="map"></div>
 
+		<a id="github" href="https://github.com/loleg/swiss-tower-finder">
+		  <span>make.opendata.ch</span>
+		  <span>Fork me on GitHub!</span>
+		</a>
 	</div>
 	
 	<div data-role="footer" data-id="foo1" data-position="fixed">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#1" class="ui-btn-active ui-state-persist">Bring me closer</a></li>
-				<li><a href="#2">Get me away!</a></li>
+				<li><a>Bring me closer...</a></li>
+				<li><a>Get me away!</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 	
+    <script type="text/javascript" src="http://api.geo.admin.ch/loader.js"></script>
+    <script type="text/javascript" src="lib/OSM.js"></script>
 </div>
 </body>
 </html>
