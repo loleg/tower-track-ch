@@ -3,8 +3,8 @@ $(document).ready(function() {
 	$('#map').css('width', $(window).width() + 'px');
 	$('#map').css('height', $(window).height() + 'px');
 
-    var api14 = new GeoAdmin.API();
-    api14.createMap({
+	var api14 = new GeoAdmin.API(); 
+    var map = api14.createMap({
         div: "map",
         easting: 501670,
         northing: 118760,
@@ -26,7 +26,7 @@ $(document).ready(function() {
 			projection: new OpenLayers.Projection("EPSG:2056")
      });
 
-    api14.map.addLayer(gml);
+    map.addLayer(gml);
 
 	//console.log(gml);
 
@@ -35,12 +35,12 @@ $(document).ready(function() {
 			new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude)
 			  .transform(
 				  new OpenLayers.Projection("EPSG:4326"), //transform from WGS 1984
-				  api14.map.getProjectionObject() //to Spherical Mercator Projection
+				  map.getProjectionObject() //to Spherical Mercator Projection
 				);
 		
 		$('#go-closer').click(function() {
 
-			api14.map.setCenter(lonLat, 14);
+			map.setCenter(lonLat, 14);
 
 			api14.showMarker({
 				iconPath: 'http://make.opendata.ch/forum/uploads/DN2MBMFGGPQX.png',
@@ -57,12 +57,12 @@ $(document).ready(function() {
 
 		$('#go-further').click(function() {
 
-			api14.map.setCenter(new OpenLayers.LonLat(684832.5,249677),9);
+			map.setCenter(new OpenLayers.LonLat(684832.5,249677),9);
 
 			api14.showMarker({
 				iconPath: 'http://make.opendata.ch/forum/uploads/DN2MBMFGGPQX.png',
 				graphicHeight: 30, graphicWidth: 30,
-				html: '<h1>Swiss Open Data Camp</h1><br><img src="https://p.twimg.com/ApTXiiHCAAAwMZg.jpg" width="100%" /><a href="http://make.opendata.ch">make.opendata.ch</a>'
+				html: '<h1>Swiss Open Data Camp</h1><br><img src="https://p.twimg.com/ApUTO45CMAAlpIQ.jpg" width="100%" /><a href="http://make.opendata.ch">make.opendata.ch</a>'
 			});
 	   
 		}); // -- end go-farther click
