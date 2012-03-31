@@ -30,4 +30,31 @@ $(document).ready(function() {
 
 	//console.log(gml);
 
+	navigator.geolocation.getCurrentPosition(function(position) {       
+		var lonLat = 
+			new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude)
+			  .transform(
+				  new OpenLayers.Projection("EPSG:4326"), //transform from WGS 1984
+				  api14.map.getProjectionObject() //to Spherical Mercator Projection
+				);
+		
+		$('#go-closer').click(function() {
+
+			api14.map.setCenter(lonLat, 14);
+
+			api14.showMarker({
+				iconPath: 'http://make.opendata.ch/forum/uploads/DN2MBMFGGPQX.png',
+				graphicHeight: 30, graphicWidth: 30,
+				html: '<h1>Swiss Open Data Camp</h1><br><img src="https://p.twimg.com/ApOPq-gCAAA1Tj0.jpg" width="100%" /><a href="http://make.opendata.ch">make.opendata.ch</a>'
+			});
+
+			/*console.log(" Latitude: " + 
+						position.coords.latitude + 
+					  " Longitude: " +
+						position.coords.longitude);*/
+	   
+		}); // -- end click
+
+	}); // -- end geolocation
+
 });
