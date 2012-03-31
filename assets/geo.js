@@ -53,7 +53,19 @@ $(document).ready(function() {
 					  " Longitude: " +
 						position.coords.longitude);*/
 	   
-		}); // -- end click
+		}); // -- end go-closer click
+
+		$('#go-further').click(function() {
+
+			api14.map.setCenter(new OpenLayers.LonLat(684832.5,249677),9);
+
+			api14.showMarker({
+				iconPath: 'http://make.opendata.ch/forum/uploads/DN2MBMFGGPQX.png',
+				graphicHeight: 30, graphicWidth: 30,
+				html: '<h1>Swiss Open Data Camp</h1><br><img src="https://p.twimg.com/ApTXiiHCAAAwMZg.jpg" width="100%" /><a href="http://make.opendata.ch">make.opendata.ch</a>'
+			});
+	   
+		}); // -- end go-farther click
 
 	}); // -- end geolocation
 
