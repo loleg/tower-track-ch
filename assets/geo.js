@@ -1,8 +1,8 @@
-$(document).ready(function() {
-
-	$('#map').css('width', $(window).width() + 'px');
-	$('#map').css('height', $(window).height() + 'px');
-
+function init() {
+/*
+	document.querySelector('#map').style.width  = window.innerWidth + 'px';
+	document.querySelector('#map').style.height = window.innerHeight + 'px';
+*/
 	var api14 = new GeoAdmin.API(); 
     var map = api14.createMap({
         div: "map",
@@ -38,7 +38,7 @@ $(document).ready(function() {
 				  map.getProjectionObject() //to Spherical Mercator Projection
 				);
 		
-		$('#go-closer').click(function() {
+		document.querySelector('#go-closer').onclick = function() {
 
 			map.setCenter(lonLat, 14);
 
@@ -53,9 +53,9 @@ $(document).ready(function() {
 					  " Longitude: " +
 						position.coords.longitude);*/
 	   
-		}); // -- end go-closer click
+		}; // -- end go-closer click
 
-		$('#go-further').click(function() {
+		document.querySelector('#go-further').onclick = function() {
 
 			map.setCenter(new OpenLayers.LonLat(684832.5,249677),9);
 
@@ -65,8 +65,8 @@ $(document).ready(function() {
 				html: '<h1>Swiss Open Data Camp</h1><br><img src="https://p.twimg.com/ApUTO45CMAAlpIQ.jpg" width="100%" /><a href="http://make.opendata.ch">make.opendata.ch</a>'
 			});
 	   
-		}); // -- end go-farther click
+		}; // -- end go-farther click
 
 	}); // -- end geolocation
 
-});
+} 

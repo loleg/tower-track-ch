@@ -3,36 +3,55 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Make.Opendata.ch</title>
-	<link rel="stylesheet"  href="lib/jquery.mobile-1.0.1.min.css" />
-	<script src="lib/jquery.js"></script>
-	<script src="lib/jquery.mobile-1.0.1.min.js"></script>
-	<script src="assets/geo.js"></script>
-	<link rel="stylesheet"  href="assets/index.css" />
-</head> 
-<body> 
-<div data-role="page" class="type-home">
-	<div data-role="content">
-		
-		<div id="map"></div>
+	<title>Tower Track</title>
 
-		<a id="github" href="https://github.com/loleg/swiss-tower-finder">
-		  <span>make.opendata.ch</span>
-		  <span>Fork me on GitHub!</span>
-		</a>
-	</div>
-	
-	<div data-role="footer" data-id="foo1" data-position="fixed">
-		<div data-role="navbar">
-			<ul>
-				<li><a id="go-closer">Bring me closer...</a></li>
-				<li><a id="go-further">Get me away!</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/headers.css">
+    <link rel="stylesheet" type="text/css" href="css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="css/toolbars.css">
+    
+	<link rel="stylesheet"  href="assets/index.css" />
 	
     <script type="text/javascript" src="http://api.geo.admin.ch/loader.js"></script>
     <script type="text/javascript" src="lib/OSM.js"></script>
-</div>
+</head> 
+<body onload="init()"> 
+
+    <section role="region">
+        <header>
+            <div id="online-status" title="Online"></div>
+            <menu type="toolbar">
+                <button id="install"><span class="icon icon-add">add</span></button>
+            </menu>
+            <h1>
+                Tower Track
+            </h1>
+        </header>
+    </section>
+    
+	<div id="main" data-role="content">
+		
+		<div id="map"></div>
+<!--
+		<a id="github" href="https://github.com/loleg/swiss-tower-finder">
+		  <span>Fork me on GitHub!</span>
+		</a>
+-->
+	</div>
+	
+	<footer>
+        <div role="toolbar">
+            <ul>
+                <li><button id="go-closer">Closer</button></li>
+                <li><button id="go-further">Further</button></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="js/base.js"></script>
+	<script src="assets/geo.js"></script>
+	
+<!--	<script src="https://apps.persona.org/include.js"></script> -->
+
 </body>
 </html>
