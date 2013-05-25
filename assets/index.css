@@ -4,12 +4,12 @@
 
 
 [role="toolbar"] li button#closer {
-    background-image: url("../images/Go-Closer.svg");
+    background-image: url("../images/Go-Closer.png");
 }
 
 
 [role="toolbar"] li button#farther {
-    background-image: url("../images/Go-Farther.svg");
+    background-image: url("../images/Go-Farther.png");
 }
 
 #github {
@@ -54,7 +54,7 @@
 }
 
 #compass {
-    background:url(../images/Simple_compass_rose.svg) no-repeat;
+    background:url(../images/Simple_compass_rose.png) no-repeat;
     background-size:100% auto;
     margin-left:-40%; left:50%;
     width:80%; height:80%;

@@ -1,12 +1,11 @@
 function init() {
-/*
-	document.querySelector('#map').style.width  = window.innerWidth + 'px';
-	document.querySelector('#map').style.height = window.innerHeight + 'px';
-*/
+
+
 
     // Based on https://github.com/bbrizzi/compass
     function rotate(angle) {
-	    compass.setAttribute("transform", "translate(125,125) rotate("+angle+")");
+	    //compass.setAttribute("transform", "translate(125,125) rotate("+angle+")");
+	    compass.style.transform = "rotate("+angle+"deg)";
     }
     if (window.DeviceOrientationEvent) {
         window.addEventListener("deviceorientation", function( event ) {
@@ -20,6 +19,8 @@ function init() {
     // Initialize Swiss map
     if (typeof GeoAdmin == 'undefined') return;
     document.querySelector('#map').style.background = "none";
+	document.querySelector('#map').style.width  = window.innerWidth + 'px';
+	document.querySelector('#map').style.height = window.innerHeight + 'px';
 	var api14 = new GeoAdmin.API(); 
     var map = api14.createMap({
         div: "map",
@@ -55,7 +56,7 @@ function init() {
 				  map.getProjectionObject() //to Spherical Mercator Projection
 				);
 		
-		document.querySelector('#go-closer').onclick = function() {
+		document.querySelector('#closer').onclick = function() {
 
 			map.setCenter(lonLat, 14);
 
@@ -72,7 +73,7 @@ function init() {
 	   
 		}; // -- end go-closer click
 
-		document.querySelector('#go-further').onclick = function() {
+		document.querySelector('#farther').onclick = function() {
 
 			map.setCenter(new OpenLayers.LonLat(684832.5,249677),9);
 
