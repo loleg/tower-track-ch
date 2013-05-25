@@ -1,10 +1,3 @@
-#map {
-  position:fixed;
-  top:0px; left:0px;
-  width:100%; height:100%;
-  overflow:hidden;
-}
-
 #github {
   right: -65px;
   height: 30px;
@@ -37,3 +30,20 @@
       opacity: 1;
     }
 
+#map {
+  position:fixed;
+  top:0px; left:0px;
+  width:100%; height:100%;
+  overflow:hidden;
+  background:url(../images/worldmap_vladstudio.jpg) no-repeat;
+  background-size:auto 100%; 
+}
+
+#compass {
+    background:url(../images/Simple_compass_rose.svg) no-repeat;
+    background-size:100% auto;
+    margin-left:-40%; left:50%;
+    width:80%; height:80%;
+    position:fixed;
+    z-index:10;
+}

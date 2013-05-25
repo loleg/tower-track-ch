@@ -3,6 +3,22 @@ function init() {
 	document.querySelector('#map').style.width  = window.innerWidth + 'px';
 	document.querySelector('#map').style.height = window.innerHeight + 'px';
 */
+
+    // Based on https://github.com/bbrizzi/compass
+    function rotate(angle) {
+	    compass.setAttribute("transform", "translate(125,125) rotate("+angle+")");
+    }
+
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener("deviceorientation", function( event ) {
+            //alpha: rotation around z-axis
+            var rotateDegrees = 360 - event.alpha;
+	        //document.querySelector("#orientation").innerHTML = rotateDegrees;
+	        rotate( rotateDegrees );
+        }, false);
+    }
+
+    if (typeof GeoAdmin == 'undefined') return;
 	var api14 = new GeoAdmin.API(); 
     var map = api14.createMap({
         div: "map",
