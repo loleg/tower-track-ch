@@ -1,3 +1,17 @@
+[role="toolbar"] li button.update {
+    background-image: url("../images/toolbars/icons/update.png");
+}
+
+
+[role="toolbar"] li button#closer {
+    background-image: url("../images/Go-Closer.svg");
+}
+
+
+[role="toolbar"] li button#farther {
+    background-image: url("../images/Go-Farther.svg");
+}
+
 #github {
   right: -65px;
   height: 30px;

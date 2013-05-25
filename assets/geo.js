@@ -8,7 +8,6 @@ function init() {
     function rotate(angle) {
 	    compass.setAttribute("transform", "translate(125,125) rotate("+angle+")");
     }
-
     if (window.DeviceOrientationEvent) {
         window.addEventListener("deviceorientation", function( event ) {
             //alpha: rotation around z-axis
@@ -18,7 +17,9 @@ function init() {
         }, false);
     }
 
+    // Initialize Swiss map
     if (typeof GeoAdmin == 'undefined') return;
+    document.querySelector('#map').style.background = "none";
 	var api14 = new GeoAdmin.API(); 
     var map = api14.createMap({
         div: "map",
