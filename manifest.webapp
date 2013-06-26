@@ -5,7 +5,7 @@
         "url":"http://utou.ch"
     },
     "version": "1",
-    "launch_path": "/towertrack/index.html",
+    "launch_path": "/index.html",
     "description":"Shows promixity of the user to the nearest radio communication tower (currently works in Switzerland only). This allows a user without reception to know in which direction to walk to get a signal, or for people trying to go as offline as possible to find the nearest gap in reception.",
     "icons":{
         "128":"icon.png"

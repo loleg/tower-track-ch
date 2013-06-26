@@ -1,11 +1,20 @@
 function init() {
 
-
+	var CONFIG_SEARCH_RADIUS = 500,
+		CONFIG_ZOOM_DEFAULT = 14,
+		CONFIG_ZOOM_CLOSER = 9;
 
     // Based on https://github.com/bbrizzi/compass
     function rotate(angle) {
+    	// Rotate virtual "compass"
 	    //compass.setAttribute("transform", "translate(125,125) rotate("+angle+")");
-	    compass.style.transform = "rotate("+angle+"deg)";
+	    //compass.style.transform = "rotate("+angle+"deg)";
+	    
+	    var origX = parseInt(document.querySelector('#map').style.width)/2;
+	    var origY = parseInt(document.querySelector('#map').style.height)/2;
+	    var layer = document.querySelector('#map div:first-child div:first-child');
+		layer.style["-webkit-transform-origin"] = origX + "px " + origY + "px";
+	    layer.style["-webkit-transform"] = "rotate("+angle+"deg)";
     }
     if (window.DeviceOrientationEvent) {
         window.addEventListener("deviceorientation", function( event ) {
@@ -61,13 +70,11 @@ function init() {
 			      new OpenLayers.Projection("EPSG:4326"), //transform from WGS 1984
 			      map.getProjectionObject() //to Spherical Mercator Projection
 			    );
-	    map.setCenter(lonlat, 14);
+	    map.setCenter(lonlat, CONFIG_ZOOM_DEFAULT);
 		//console.log(lonlat);
 	
 	    document.querySelector('#closer').onclick = function() {
-        	map.setCenter(lonlat, 9);	
-        	
-        	var bbsize = 500;
+        	map.setCenter(lonlat, CONFIG_ZOOM_CLOSER);	
         	
         	var scriptProtocol = new OpenLayers.Protocol.Script({
                  url: GeoAdmin.webServicesUrl + '/feature/search',
@@ -75,10 +82,10 @@ function init() {
                      layers: 'ch.bakom.mobil-antennenstandorte-gsm',
                      //easting: lonlat.lon, northing: lonlat.lat,
                      bbox: 
-                     	(lonlat.lon-bbsize) + ',' +
-                     	(lonlat.lat-bbsize) + ',' +
-                     	(lonlat.lon+bbsize) + ',' +
-                     	(lonlat.lat+bbsize)
+                     	(lonlat.lon-CONFIG_SEARCH_RADIUS) + ',' +
+                     	(lonlat.lat-CONFIG_SEARCH_RADIUS) + ',' +
+                     	(lonlat.lon+CONFIG_SEARCH_RADIUS) + ',' +
+                     	(lonlat.lat+CONFIG_SEARCH_RADIUS)
                  },
                  handleResponse: function(response) {
                      var message,lon,lat;
@@ -91,7 +98,7 @@ function init() {
                          // Find the nearest
                          var shortestDist = 99999;
                          var nearestFeature = null;
-                         console.log(response.data);
+                         //console.log(response.data);
                          
                          for (var i = 0; i < response.data.features.length; i++) {
                              var feature = response.data.features[i];
@@ -112,7 +119,7 @@ function init() {
 			                     easting: nearestFeature.lon,
 				                 northing: nearestFeature.lat,
 				                 recenter: "true",
-				                 html: "Here is the closest GSM antenna to your location"
+				                 html: "Closest GSM antenna to your location"
 				             });
 				             
 		                 } else {
@@ -145,16 +152,12 @@ function init() {
 					    position.coords.longitude);*/
        
 	    }; // -- end go-closer click
+	    
+	    document.querySelector('#closer').click();
 
 	    document.querySelector('#farther').onclick = function() {
-            alert('go farther..');
-		    map.setCenter(new OpenLayers.LonLat(684832.5,249677),9);
-
-		    api14.showMarker({
-			    iconPath: 'http://make.opendata.ch/forum/uploads/DN2MBMFGGPQX.png',
-			    graphicHeight: 30, graphicWidth: 30,
-			    html: '<h1>Swiss Open Data Camp</h1><br><img src="https://p.twimg.com/ApUTO45CMAAlpIQ.jpg" width="100%" /><a href="http://make.opendata.ch">make.opendata.ch</a>'
-		    });
+            alert('Go far.. is not yet implemented.');
+		    map.setCenter(new OpenLayers.LonLat(684832.5,249677), CONFIG_ZOOM_DEFAULT);
        
 	    }; // -- end go-farther click
 
