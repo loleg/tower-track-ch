@@ -12,6 +12,10 @@
     background-image: url("../images/Go-Farther.png");
 }
 
+[type="toolbar"] img {
+    height: 80%; padding:10% 0;
+}
+
 #github {
   right: -65px;
   height: 30px;
