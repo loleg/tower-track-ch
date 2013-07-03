@@ -1,6 +1,6 @@
 function init() {
 
-	var CONFIG_SEARCH_RADIUS = 500,
+	var CONFIG_SEARCH_RADIUS = 800,
 		CONFIG_ZOOM_DEFAULT = 14,
 		CONFIG_ZOOM_CLOSER = 9;
 
@@ -37,6 +37,8 @@ function init() {
         northing: 118760,
         zoom: 5
     });
+    
+    var heatmap = null;
 
     /*
     var gml = new OpenLayers.Layer.Vector("Point Layer", {
@@ -59,9 +61,12 @@ function init() {
 	//console.log(gml);
 	*/
 	
-    map.addLayerByName('ch.bakom.mobil-antennenstandorte-umts');
-    map.addLayerByName('ch.bakom.mobil-antennenstandorte-lte');
-    map.addLayerByName('ch.bakom.mobil-antennenstandorte-gsm');
+	// TODO: disabled for speed
+    //map.addLayerByName('ch.bakom.mobil-antennenstandorte-umts');
+    //map.addLayerByName('ch.bakom.mobil-antennenstandorte-lte');
+    var layerGSM = map.addLayerByName('ch.bakom.mobil-antennenstandorte-gsm');
+    
+    var responseFeatureData = null;
 
     navigator.geolocation.getCurrentPosition(function(position) {       
 	    var lonlat = 
@@ -89,21 +94,23 @@ function init() {
                  },
                  handleResponse: function(response) {
                      var message,lon,lat;
+                     responseFeatureData = null;
                      if (response.data.length == 0) {
                          api14.showPopup({
 		                     recenter: "true",
-		                     html: "No antennas nearby found, sorry"
+		                     html: "No antennas near, sorry (are you in Switzerland?)"
 		                 });
                      } else {
                          // Find the nearest
                          var shortestDist = 99999;
                          var nearestFeature = null;
                          //console.log(response.data);
+                         responseFeatureData = response.data;
                          
                          for (var i = 0; i < response.data.features.length; i++) {
                              var feature = response.data.features[i];
-                             var X = feature.geometry.coordinates[1];
-                             var Y = feature.geometry.coordinates[0];
+                             var X = feature.geometry.coordinates[1]; // lat
+                             var Y = feature.geometry.coordinates[0]; // lon
                              var dist = Math.sqrt(Math.pow((lonlat.lon - Y), 2) + 
                              					  Math.pow((lonlat.lat - X), 2));
                              if (shortestDist > dist) {
@@ -156,8 +163,35 @@ function init() {
 	    document.querySelector('#closer').click();
 
 	    document.querySelector('#farther').onclick = function() {
-            alert('Go far.. is not yet implemented.');
-		    map.setCenter(new OpenLayers.LonLat(684832.5,249677), CONFIG_ZOOM_DEFAULT);
+	    
+		    //map.setCenter(new OpenLayers.LonLat(684832.5,249677), CONFIG_ZOOM_DEFAULT);
+		    
+		    if (responseFeatureData == null) { return; }
+		    
+		   	var heatmapConfig = { max: 6 , data: [] };
+		   	
+		    for (var i = 0; i < responseFeatureData.features.length; i++) {
+				var feature = responseFeatureData.features[i];
+				var lat = feature.geometry.coordinates[1];
+				var lon = feature.geometry.coordinates[0];
+
+				heatmapConfig.data.push({
+				    lonlat: new OpenLayers.LonLat(lon, lat),
+				    count: parseInt(Math.random() * 10)
+				});
+		    }
+		    
+		    if (heatmap == null) {
+				heatmap = new OpenLayers.Layer.Heatmap( "Heatmap Layer", 
+					map, map.getLayerByLayerName("ch.swisstopo.pixelkarte-farbe"), 
+					{visible: true, radius: 100}, 
+					{isBaseLayer: false, opacity: 0.5, 
+					projection:new OpenLayers.Projection("EPSG:2056")});
+				map.addLayer(heatmap);
+			}
+			heatmap.setDataSet(heatmapConfig);
+			
+			//debugger;
        
 	    }; // -- end go-farther click
 
