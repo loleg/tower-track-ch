@@ -38,7 +38,7 @@ function init() {
         zoom: 5
     });
     
-    var heatmap = null;
+    var heatmap = null, popup = null;
 
     /*
     var gml = new OpenLayers.Layer.Vector("Point Layer", {
@@ -96,7 +96,7 @@ function init() {
                      var message,lon,lat;
                      responseFeatureData = null;
                      if (response.data.length == 0) {
-                         api14.showPopup({
+                         popup = api14.showPopup({
 		                     recenter: "true",
 		                     html: "No antennas near, sorry (are you in Switzerland?)"
 		                 });
@@ -122,7 +122,7 @@ function init() {
                          }
                          
                          if (nearestFeature != null) {
-		                     api14.showPopup({
+		                     popup = api14.showPopup({
 			                     easting: nearestFeature.lon,
 				                 northing: nearestFeature.lat,
 				                 recenter: "true",
@@ -130,7 +130,7 @@ function init() {
 				             });
 				             
 		                 } else {
-				             api14.showPopup({
+				             popup = api14.showPopup({
 				                 recenter: "true",
 				                 html: "No antennas nearby found, sorry"
 				             });
@@ -191,6 +191,7 @@ function init() {
 			}
 			heatmap.setDataSet(heatmapConfig);
 			
+			popup.close();
 			//debugger;
        
 	    }; // -- end go-farther click
