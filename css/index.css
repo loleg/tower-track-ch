@@ -1,10 +1,13 @@
+body { overflow: hidden; }
+
 [role="toolbar"] li button {
-	font-size: 1.6em;
+	font-size: inherit;
 	color: white;
-	padding-left: 38px;
-	width: 7em;
-	margin-right: 1em;
-	background-position-x: 3px;
+	width: auto;
+	padding-left: 35px;
+	padding-right: 10px;
+	margin: 0;
+	background-position: 0 center;
 }
 
 [role="toolbar"] li button.update {
@@ -22,40 +25,12 @@
 }
 
 [type="toolbar"] img {
-    height: 80%; padding:10% 0;
+    height: 80%; padding:5px 0;
 }
 
-#github {
-  right: -65px;
-  height: 30px;
-  top: 40px;
-  position: absolute;
-  text-decoration: none;
-  width: 250px;
-	-webkit-transform: rotate(45deg); 
-	-moz-transform: rotate(45deg);	
+[type="toolbar"] a {
+    width:80px !important;
 }
-#github span {
-    background: red;
-    color: white;
-    font-size: 14px;
-    left: 0;
-    padding: 5px 0;
-    position: absolute;
-    text-align: center;
-    width: 250px;
-}
-#github span:last-child {
-      /* this is the backside */
-      background: orange;
-      opacity: 0;
-    }
-#github:hover span:first-child {
-      opacity: 0;
-    }
-#github:hover span:last-child {
-      opacity: 1;
-    }
 
 #map {
   position:fixed;
